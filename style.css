@@ -1,13 +1,28 @@
 body {
     display:flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
-div {
-    outline: 1px solid rgb(255, 0, 128);
+
+button {
+    background-color: pink;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 30px;
+    font-weight: bolder;
+}
+button:hover{
+    background-color: rgb(255, 167, 181);
 }
 
 #grid {
     display: flex;
     flex-direction: column;
-    outline: 1px solid black;
+    outline: 5px solid black;
+}
+
+.cell{
+    outline: 1px solid lightgray;
 }
