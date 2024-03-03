@@ -1,10 +1,14 @@
-function grid(cellsPerSide) {
-    let container = document.querySelector('#grid');
+let mode = "COLOR"
 
-    //clears grid
+let container = document.querySelector('#grid');
+let colorInput = document.querySelector('#color-picker');
+
+let selectedColor = 'black';
+
+function grid(cellsPerSide) {
+    // clears grid
     container.replaceChildren();
 
-    //80% of window's width divided by aspect ratio, this ensures the grid is always visible
     let gridWidth = (window.innerHeight * 0.7); 
     let cellWidth = gridWidth / cellsPerSide;
 
@@ -26,17 +30,27 @@ function grid(cellsPerSide) {
         container.appendChild(row);
     }
     
-    onHover("RANDOM_COLOR");
+    onHover(mode);
 }
 
-function onHover(behavior){
+function switchMode (chosen_mode) {
+    mode = chosen_mode;
+}
+
+function onHover(){
     let cellList = document.querySelectorAll(".cell");
 
     for(let cell of cellList) {
         cell.addEventListener('mouseover', function(){
-            switch(behavior) {
+            switch(mode) {
                 case "RANDOM_COLOR":
                     cell.style.backgroundColor = getRandomColor();
+                    break;
+                case "COLOR":
+                    cell.style.backgroundColor = selectedColor;
+                    break;
+                case "ERASER": 
+                    cell.style.backgroundColor = 'white';
                     break;
             }
         });
@@ -70,3 +84,8 @@ function newGrid(){
 }
 
 grid(16);
+
+colorInput.addEventListener('input', function(event) {
+    selectedColor = event.target.value;
+    console.log(selectedColor);
+});
