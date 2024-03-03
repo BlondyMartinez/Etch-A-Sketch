@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="src/main.js" defer></script>
+    <link rel="stylesheet" href="src/style.css">
+    <title>Etch-a-Sketch</title>
+</head>
+<body>
+    <h1>Etch a Sketch</h1>
+    <div class="web-body">
+        <div class="options">
+            <input type="color" class="color-picker" id="color-picker">
+            <br>
+            <button class="mode toggle" onclick="switchMode('COLOR')">Color</button>
+            <button class="mode toggle" onclick="switchMode('RANDOM_COLOR')">Rainbow</button>
+            <button class="mode toggle" onclick="switchMode('ERASER')">Eraser</button>
+            <br>
+            <button class="toggle">Lighten</button>
+            <button class="toggle">Darken</button><br>
+            <br>
+            <button onclick="clearGrid()">Clear</button>
+            <button onclick="newGrid()">Set Grid Size</button>
+        </div>
+        <div id="grid"></div>
+    </div>
+    <div class="footer">
+        <h6>Designed by Blondy Martinez</h6>
+    </div>
+</body>
+</html>
