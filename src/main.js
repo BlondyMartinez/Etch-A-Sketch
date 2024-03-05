@@ -38,20 +38,32 @@ function switchMode (chosen_mode) {
 }
 
 function onHover(){
-    let cellList = document.querySelectorAll(".cell");
+    let mouseDown = false;
 
-    for(let cell of cellList) {
-        cell.addEventListener('mouseover', function(){
-            switch(mode) {
-                case "RANDOM_COLOR":
-                    cell.style.backgroundColor = getRandomColor();
-                    break;
-                case "COLOR":
-                    cell.style.backgroundColor = selectedColor;
-                    break;
-                case "ERASER": 
-                    cell.style.backgroundColor = 'white';
-                    break;
+    container.addEventListener('mousedown', function() {
+        mouseDown = true;
+    });
+    
+    container.addEventListener('mouseup', function() {
+        mouseDown = false;
+    });
+    
+    let cellList = document.querySelectorAll(".cell");
+    
+    for (let cell of cellList) {
+        cell.addEventListener('mousemove', function() {
+            if (mouseDown) { 
+                switch (mode) {
+                    case "RANDOM_COLOR":
+                        cell.style.backgroundColor = getRandomColor();
+                        break;
+                    case "COLOR":
+                        cell.style.backgroundColor = selectedColor;
+                        break;
+                    case "ERASER":
+                        cell.style.backgroundColor = 'white';
+                        break;
+                }
             }
         });
     }
