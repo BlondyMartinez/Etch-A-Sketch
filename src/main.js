@@ -95,6 +95,15 @@ function newGrid(){
     grid(cells);
 }
 
+function displayGridCells() {
+    for(let i = 0; i < container.children.length; i++) {
+        for (let j = 0; j < container.children[i].children.length; j++) {
+            if (container.children[i].children[j].classList.contains('cell')) container.children[i].children[j].classList.remove("cell");
+            else container.children[i].children[j].classList.add("cell");
+        }
+    }
+}
+
 grid(16);
 
 colorInput.addEventListener('input', function(event) {
