@@ -17,11 +17,11 @@
             <button class="mode toggle" onclick="switchMode('RANDOM_COLOR')">Rainbow</button>
             <button class="mode toggle" onclick="switchMode('ERASER')">Eraser</button>
             <br>
-            <button class="toggle">Lighten</button>
-            <button class="toggle">Darken</button><br>
+            <button class="toggle" onclick="switchMode('LIGHTEN')">Lighten</button>
+            <button class="toggle" onclick="switchMode('DARKEN')">Darken</button><br>
             <br>
-            <button class="utility" onclick="displayGridCells()">Show Grid</button>
             <button class="utility" onclick="clearGrid()">Clear</button>
+            <button class="utility" onclick="displayGridCells(this)">Hide Grid</button>
             <button class="utility" onclick="newGrid()">Set Grid Size</button>
         </div>
         <div id="grid"></div>
