@@ -37,7 +37,7 @@ function switchMode (chosen_mode) {
     mode = chosen_mode;
 }
 
-function onHover(){
+function onHover() {
     let mouseDown = false;
 
     container.addEventListener('mousedown', function() {
@@ -51,8 +51,15 @@ function onHover(){
     let cellList = document.querySelectorAll(".cell");
     
     for (let cell of cellList) {
-        cell.addEventListener('mousemove', function() {
+        cell.addEventListener('mouseover', function() {
             if (mouseDown) { 
+                let currentColor = parseRGB(cell.style.backgroundColor);
+                
+                let step = 10;
+                let newR = 0;
+                let newG = 0
+                let newB = 0;
+
                 switch (mode) {
                     case "RANDOM_COLOR":
                         cell.style.backgroundColor = getRandomColor();
@@ -60,11 +67,24 @@ function onHover(){
                     case "COLOR":
                         cell.style.backgroundColor = selectedColor;
                         break;
+                    case "LIGHTEN":
+                        if (cell.style.backgroundColor != 'white') {
+                            newR = Math.min(currentColor.r + step, 255);
+                            newG = Math.min(currentColor.g + step, 255);
+                            newB = Math.min(currentColor.b + step, 255);
+
+                            cell.style.backgroundColor = `rgb(${newR}, ${newG}, ${newB})`;
+                        }
+                        break;              
+                    case "DARKEN":
+                        
+                        break;
                     case "ERASER":
                         cell.style.backgroundColor = 'white';
                         break;
                 }
             }
+            
         });
     }
 }
@@ -95,18 +115,35 @@ function newGrid(){
     grid(cells);
 }
 
-function displayGridCells() {
+function displayGridCells(element) {
     for(let i = 0; i < container.children.length; i++) {
         for (let j = 0; j < container.children[i].children.length; j++) {
-            if (container.children[i].children[j].classList.contains('cell')) container.children[i].children[j].classList.remove("cell");
-            else container.children[i].children[j].classList.add("cell");
+            if (container.children[i].children[j].classList.contains('cell')) {
+                container.children[i].children[j].classList.remove("cell");
+                element.textContent = "Show Grid";
+            } else {
+                container.children[i].children[j].classList.add("cell"); 
+                element.textContent = "Hide Grid";
+            }
         }
     }
+}
+
+function parseRGB(rgbString) {
+    let regex = /rgb\((\d+), (\d+), (\d+)\)/;
+    let match = rgbString.match(regex);
+    
+    if (match) {
+        let r = parseInt(match[1]);
+        let g = parseInt(match[2]);
+        let b = parseInt(match[3]);
+
+        return { r, g, b };
+    } else return { r: 0, g: 0, b: 0 }; 
 }
 
 grid(16);
 
 colorInput.addEventListener('input', function(event) {
     selectedColor = event.target.value;
-    console.log(selectedColor);
 });
