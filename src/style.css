@@ -28,6 +28,7 @@ button{
     border-radius: 10px;
 }
 
+.utility:hover,
 .toggle:focus {
     background-color: #ADD8E6;
     color:rgb(33, 54, 54);
@@ -81,8 +82,8 @@ body {
     -moz-appearance: none;
     appearance: none;
     background-color: transparent;
-    width: 100px;
-    height: 100px;
+    width: 5vw;
+    height: 5vw;
     border: none;
     cursor: pointer;
 }
