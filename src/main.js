@@ -77,7 +77,13 @@ function onHover() {
                         }
                         break;              
                     case "DARKEN":
-                        
+                        if (cell.style.backgroundColor != 'white') {
+                            newR = Math.max(currentColor.r - step, 0);
+                            newG = Math.max(currentColor.g - step, 0);
+                            newB = Math.max(currentColor.b - step, 0);
+
+                            cell.style.backgroundColor = `rgb(${newR}, ${newG}, ${newB})`;
+                        }
                         break;
                     case "ERASER":
                         cell.style.backgroundColor = 'white';
