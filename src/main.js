@@ -52,18 +52,18 @@ function onHoverAndClick() {
     
     for (let cell of cellList) {
         cell.addEventListener('mouseover', function() {
-            if (mouseDown) switchMode(cell);
+            if (mouseDown) colorMode(cell);
         });
 
         cell.addEventListener('click', function() {
-            switchMode(cell);
+            colorMode(cell);
         });
     }
 }
 
-function switchMode(cell) {
+function colorMode(cell){
     let currentColor = parseRGB(cell.style.backgroundColor);
-                
+    
     let step = 10;
     let newR = 0;
     let newG = 0
