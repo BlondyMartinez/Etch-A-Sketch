@@ -33,8 +33,19 @@ function grid(cellsPerSide) {
     onHoverAndClick(mode);
 }
 
-function switchMode (chosen_mode) {
+function switchMode(chosen_mode, button) {
     mode = chosen_mode;
+    selectButton(button);
+}
+
+function selectButton(button) {
+    let buttonList = document.querySelectorAll('.radio');
+    
+    for(let button of buttonList){
+        if(button.classList.contains('selected')) button.classList.remove('selected');
+    }
+
+    button.classList.add('selected');
 }
 
 function onHoverAndClick() {
@@ -192,4 +203,5 @@ grid(16);
 
 colorInput.addEventListener('input', function(event) {
     selectedColor = event.target.value;
+    switchMode('COLOR', document.getElementById('color-btn'));
 });

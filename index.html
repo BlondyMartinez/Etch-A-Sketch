@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/a20bb7d309.js" crossorigin="anonymous" defer></script>
+
     <script src="src/main.js" defer></script>
     <link rel="stylesheet" href="src/style.css">
     <title>Etch-a-Sketch</title>
@@ -12,13 +16,12 @@
     <div class="web-body">
         <div class="options">
             <input type="color" class="color-picker" id="color-picker">
-            <br>
-            <button class="mode toggle" onclick="switchMode('COLOR')">Color</button>
-            <button class="mode toggle" onclick="switchMode('RANDOM_COLOR')">Rainbow</button>
-            <button class="mode toggle" onclick="switchMode('ERASER')">Eraser</button>
-            <br>
-            <button class="toggle" onclick="switchMode('LIGHTEN')">Lighten</button>
-            <button class="toggle" onclick="switchMode('DARKEN')">Darken</button><br>
+            <button class="radio selected" id="color-btn" onclick="switchMode('COLOR', this)"><i class="fa-solid fa-paintbrush"></i></button>
+            <button class="radio" onclick="switchMode('RANDOM_COLOR', this)"><i class="fa-solid fa-rainbow"></i></button>
+            <button class="radio" onclick="switchMode('BUCKET', this)"><i class="fa-solid fa-fill-drip"></i></button>
+            <button class="radio" onclick="switchMode('ERASER', this)"><i class="fa-solid fa-eraser"></i></button>
+            <button class="radio" onclick="switchMode('LIGHTEN', this)">Lighten</button>
+            <button class="radio" onclick="switchMode('DARKEN', this)">Darken</button><br>
             <br>
             <button class="utility" onclick="clearGrid()">Clear</button>
             <button class="utility" onclick="displayGridCells(this)">Hide Grid</button>
@@ -27,7 +30,10 @@
         <div id="grid"></div>
     </div>
     <div class="footer">
-        <h6>Designed by Blondy Martinez</h6>
+        <h6>Designed by Blondy Martinez 
+            <a href="https://github.com/BlondyMartinez" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/blondy-martinez/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        </h6>
     </div>
 </body>
 </html>
