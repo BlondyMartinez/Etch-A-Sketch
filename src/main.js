@@ -30,14 +30,14 @@ function grid(cellsPerSide) {
         container.appendChild(row);
     }
     
-    onHover(mode);
+    onHoverAndClick(mode);
 }
 
 function switchMode (chosen_mode) {
     mode = chosen_mode;
 }
 
-function onHover() {
+function onHoverAndClick() {
     let mouseDown = false;
 
     container.addEventListener('mousedown', function() {
@@ -52,46 +52,51 @@ function onHover() {
     
     for (let cell of cellList) {
         cell.addEventListener('mouseover', function() {
-            if (mouseDown) { 
-                let currentColor = parseRGB(cell.style.backgroundColor);
-                
-                let step = 10;
-                let newR = 0;
-                let newG = 0
-                let newB = 0;
-
-                switch (mode) {
-                    case "RANDOM_COLOR":
-                        cell.style.backgroundColor = getRandomColor();
-                        break;
-                    case "COLOR":
-                        cell.style.backgroundColor = selectedColor;
-                        break;
-                    case "LIGHTEN":
-                        if (cell.style.backgroundColor != 'white') {
-                            newR = Math.min(currentColor.r + step, 255);
-                            newG = Math.min(currentColor.g + step, 255);
-                            newB = Math.min(currentColor.b + step, 255);
-
-                            cell.style.backgroundColor = `rgb(${newR}, ${newG}, ${newB})`;
-                        }
-                        break;              
-                    case "DARKEN":
-                        if (cell.style.backgroundColor != 'white') {
-                            newR = Math.max(currentColor.r - step, 0);
-                            newG = Math.max(currentColor.g - step, 0);
-                            newB = Math.max(currentColor.b - step, 0);
-
-                            cell.style.backgroundColor = `rgb(${newR}, ${newG}, ${newB})`;
-                        }
-                        break;
-                    case "ERASER":
-                        cell.style.backgroundColor = 'white';
-                        break;
-                }
-            }
-            
+            if (mouseDown) switchMode(cell);
         });
+
+        cell.addEventListener('click', function() {
+            switchMode(cell);
+        });
+    }
+}
+
+function switchMode(cell) {
+    let currentColor = parseRGB(cell.style.backgroundColor);
+                
+    let step = 10;
+    let newR = 0;
+    let newG = 0
+    let newB = 0;
+
+    switch (mode) {
+        case "RANDOM_COLOR":
+            cell.style.backgroundColor = getRandomColor();
+            break;
+        case "COLOR":
+            cell.style.backgroundColor = selectedColor;
+            break;
+        case "LIGHTEN":
+            if (cell.style.backgroundColor != 'white') {
+                newR = Math.min(currentColor.r + step, 255);
+                newG = Math.min(currentColor.g + step, 255);
+                newB = Math.min(currentColor.b + step, 255);
+
+                cell.style.backgroundColor = `rgb(${newR}, ${newG}, ${newB})`;
+            }
+            break;              
+        case "DARKEN":
+            if (cell.style.backgroundColor != 'white') {
+                newR = Math.max(currentColor.r - step, 0);
+                newG = Math.max(currentColor.g - step, 0);
+                newB = Math.max(currentColor.b - step, 0);
+
+                cell.style.backgroundColor = `rgb(${newR}, ${newG}, ${newB})`;
+            }
+            break;
+        case "ERASER":
+            cell.style.backgroundColor = 'white';
+            break;
     }
 }
 
