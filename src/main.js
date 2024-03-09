@@ -97,7 +97,42 @@ function colorMode(cell){
         case "ERASER":
             cell.style.backgroundColor = 'white';
             break;
+        case "BUCKET":
+            bucketFill(cell);
+            break;
     }
+}
+
+function bucketFill(cell) {
+    let targetColor = cell.style.backgroundColor;
+
+    function fillAdjacentCells(row, col) {
+        if (row >= 0 && row < container.children.length && col >= 0 && col < container.children[row].children.length &&
+            container.children[row].children[col].style.backgroundColor === targetColor) {
+            container.children[row].children[col].style.backgroundColor = selectedColor;
+            fillAdjacentCells(row - 1, col); // top
+            fillAdjacentCells(row + 1, col); // bottom
+            fillAdjacentCells(row, col - 1); // left
+            fillAdjacentCells(row, col + 1); // right
+        }
+    }
+
+    let rowIndex = -1;
+    let cellIndex = -1;
+
+    for (let i = 0; i < container.children.length; i++) {
+        let row = container.children[i];
+        for (let j = 0; j < row.children.length; j++) {
+            if (row.children[j] === cell) {
+                rowIndex = i;
+                cellIndex = j;
+                break;
+            }
+        }
+        if (rowIndex !== -1)  break; 
+    }
+    
+    fillAdjacentCells(rowIndex, cellIndex);
 }
 
 function getRandomColor() {
